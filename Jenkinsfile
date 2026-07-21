@@ -1,49 +1,43 @@
 pipeline {
+
     agent any
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out source code...'
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the application...'
-                sh 'echo Build completed successfully'
+                echo 'Building Application...'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'echo All tests passed'
+                echo 'Running Tests...'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
-                sh 'echo Application deployed successfully.'
+                sh '''
+                sudo cp -r * /var/www/html/
+                '''
             }
         }
-
     }
 
     post {
-        always {
-            echo 'Pipeline execution completed.'
-        }
-
         success {
-            echo 'Build SUCCESS'
+            echo 'Application Deployed Successfully!'
         }
 
         failure {
-            echo 'Build FAILED'
+            echo 'Deployment Failed!'
         }
     }
 }
