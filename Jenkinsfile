@@ -5,25 +5,28 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out source code from GitHub...'
                 checkout scm
+                echo 'Checkout completed'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the application...'
+                echo 'Build completed'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
+                echo 'Test completed'
             }
         }
 
         stage('Deploy') {
             steps {
+                sh '''
+                sudo cp index.html /var/www/html/index.html
+                '''
                 echo 'Application deployed successfully.'
             }
         }
