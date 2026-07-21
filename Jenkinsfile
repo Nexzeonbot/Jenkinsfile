@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -24,9 +23,6 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh '''
-                sudo cp index.html /var/www/html/index.html
-                '''
                 echo 'Application deployed successfully.'
             }
         }
